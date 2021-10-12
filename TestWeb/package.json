@@ -1,0 +1,42 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "autoprefixer": "^10.3.7",
+    "browser-sync": "^2.27.5",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-postcss": "^9.0.1",
+    "gulp-uglify": "^3.0.2",
+    "merge-stream": "^2.0.0",
+    "postcss": "^8.3.9",
+    "postcss-color-function": "^4.1.0",
+    "postcss-hexrgba": "^2.0.1",
+    "postcss-import": "^14.0.2",
+    "postcss-mixins": "^8.1.0",
+    "postcss-nested": "^5.0.6",
+    "postcss-simple-vars": "^6.0.3"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
+    "axios": "^0.22.0",
+    "bootstrap": "^4.6.0",
+    "chart.js": "^2.9.4",
+    "datatables.net": "^1.11.3",
+    "datatables.net-bs4": "^1.11.3",
+    "jquery": "^3.6.0",
+    "jquery-confirm": "^3.3.4",
+    "jquery-validation": "^1.19.3",
+    "jquery-validation-unobtrusive": "^3.2.12",
+    "jquery.easing": "^1.4.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "select2": "^4.1.0-rc.0"
+  }
+}

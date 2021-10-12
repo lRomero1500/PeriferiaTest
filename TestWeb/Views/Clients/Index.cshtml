@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Clientes";
+}
+<h1 class="h3 mb-4 text-gray-800">Clientes</h1>
+<p class="mb-4">Aquí podrá ver los clientes registrados</p>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="clientsTable" rel="dataTable" class="table table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th width="50%">Nombre Cliente</th>
+                        <th width="40%">DNI</th>
+                        <th width="10%"> Acciones <a href=""><i class="fas fa-plus-square"></i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Client client in ViewBag.clients)
+                    {
+                        <tr>
+                            <td>@(client.name+" "+client.lastName)</td>
+                            <td>@client.dni</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

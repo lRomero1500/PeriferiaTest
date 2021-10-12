@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Entities\Client.cs~RF2acc6ac.TMP" />
-    <None Remove="Entities\Product.cs~RF2a2bfc7.TMP" />
+    <None Remove="4. Data\Entities\Client.cs~RF2acc6ac.TMP" />
+    <None Remove="4. Data\Entities\Product.cs~RF2a2bfc7.TMP" />
   </ItemGroup>
 
   <ItemGroup>

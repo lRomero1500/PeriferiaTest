@@ -1,0 +1,49 @@
+﻿@model Client
+@{
+    ViewBag.Title = "Crear Clientes";
+}
+<h1 class="h3 mb-4 text-gray-800">Crear Cliente</h1>
+<p class="mb-4">Aquí podrá crear clientes, los cuales podrán adquirir productos</p>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form novalidate>
+            <input name="id" id="id" type="hidden" value="">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="name">Nombre</label>
+                    <input name="name" id="name" class="form-control" data-rule-required="true"
+                           maxlength="150"
+                           data-msg-required="El campo nombre es requerido" value="@Model.name">
+                </div>
+                <div class="form-group col-6">
+                    <label for="lastName">Apellido</label>
+                    <input name="lastName" id="lastName" class="form-control" data-rule-required="true"
+                           data-msg-required="El campo apelido es requerido"
+                           maxlength="150" value="@Model.lastName">
+                </div>
+            </div>
+            <div class="form-row">
+
+                <div class="form-group col-6">
+                    <label for="dni">Cédula</label>
+                    <input name="dni" id="dni" class="form-control" data-rule-required="true"
+                           data-msg-required="El campo cédula es requerido" data-rule-digits="true" data-msg-digits="ingrese solo numeros" value="@Model.dni">
+                </div>
+                <div class="form-group col-6">
+                    <label for="phoneNumber">Teléfono</label>
+                    <input name="phoneNumber" id="phoneNumber" class="form-control" data-rule-required="true"
+                           data-msg-required="El campo teléfono es requerido" data-rule-digits="true" data-msg-digits="ingrese solo numeros"  value="@Model.phoneNumber">
+                </div>
+            </div>
+            <div class="form-row">
+                <button onclick="clients.submit(this);" type="button" class="btn btn-primary btnGeneral"
+                        data-loading-text="<span class='spinner-grow spinner-grow-sm'
+                                    role='status' aria-hidden='true'></span> Guardando...">Guardar
+                    </button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/views/clients/clients.js"></script>
+}

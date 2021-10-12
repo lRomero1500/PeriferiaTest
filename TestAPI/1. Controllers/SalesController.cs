@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TestAPI.Entities;
+using TestAPI.Managers.Interfaces;
 using TestAPI.Services;
 
 namespace TestAPI.Controllers
@@ -14,25 +15,25 @@ namespace TestAPI.Controllers
     [ApiController]
     public class SalesController : ControllerBase
     {
-        private readonly Context _context;
+        private ISalesManager _salesManager;
 
-        public SalesController(Context context)
+        public SalesController(ISalesManager salesManager)
         {
-            _context = context;
+            _salesManager = salesManager;
         }
 
         // GET: api/Sales
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sales>>> Getsales()
         {
-            return await _context.sales.ToListAsync();
+            return await _salesManager.getAll();
         }
 
         // GET: api/Sales/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Sales>> GetSales(long id)
         {
-            var sales = await _context.sales.FindAsync(id);
+            var sales = await _salesManager.getById(id);
 
             if (sales == null)
             {
@@ -52,22 +53,14 @@ namespace TestAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(sales).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _salesManager.createUpdate(sales);
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SalesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
 
             return NoContent();
@@ -78,8 +71,7 @@ namespace TestAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Sales>> PostSales(Sales sales)
         {
-            _context.sales.Add(sales);
-            await _context.SaveChangesAsync();
+            await _salesManager.createUpdate(sales);
 
             return CreatedAtAction("GetSales", new { id = sales.id }, sales);
         }
@@ -88,21 +80,8 @@ namespace TestAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSales(long id)
         {
-            var sales = await _context.sales.FindAsync(id);
-            if (sales == null)
-            {
-                return NotFound();
-            }
-
-            _context.sales.Remove(sales);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return NotFound();
         }
-
-        private bool SalesExists(long id)
-        {
-            return _context.sales.Any(e => e.id == id);
-        }
+        
     }
 }
