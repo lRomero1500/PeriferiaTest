@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "Dashboard";
+    CultureInfo culinf = new CultureInfo("es-CO");
 }
 <h1 class="h3 mb-4 text-gray-800">Ventas</h1>
 <p class="mb-4">Aquí podrá ver las ventas realizadas</p>
@@ -17,20 +18,20 @@
                 <tbody>
                     @foreach (Product product in ViewBag.products)
                     {
-                        <tr>
-                            <td>@product.name</td>
-                            <td>@product.unitValue</td>
-                            <td>
-                                <a onclick="products.delete(this,@product.id)"
-                                   data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
-                                    <i class="fas fa-trash-alt"></i>
-                                </a>-
-                                <a href="@Url.Action("Edit", "Products",new { id=product.id})"
-                                   data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@product.name</td>
+                        <td>$ @((string.Format(culinf, "{0:#,0.#}", float.Parse((product.unitValue.ToString())))))</td>
+                        <td>
+                            <a onclick="products.delete(this,@product.id)"
+                               data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>-
+                            <a href="@Url.Action("Edit", "Products",new { id=product.id})"
+                               data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

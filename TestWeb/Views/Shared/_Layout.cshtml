@@ -20,8 +20,8 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="@Url.Action("Index", "Home")">
                 <div class="sidebar-brand-text mx-3">
-                    <span>Administrativo</span>
-                    Ecommerce
+                    <span>Periferia</span>
+                    Test
                 </div>
             </a>
 
@@ -47,14 +47,14 @@
 
             <li class="nav-item">
                 <a class="nav-link collapsed"
-                   href="@Url.Action("Index", "Clients")"
+                   href="@(Context.Request.GetDisplayUrl().ToString().Contains("Clients")?Context.Request.GetDisplayUrl().ToString():"#")"
                    data-toggle="collapse" data-target="#Sliders"
-                   aria-expanded="#"
+                   aria-expanded="@(Context.Request.GetDisplayUrl().ToString().Contains("Clients")?"true":"false")"
                    aria-controls="collapseSliders">
                     <i class="fas fa-users"></i>
                     <span>Clientes</span>
                 </a>
-                <div id="Sliders" class="collapse "
+                <div id="Sliders" class="collapse @(Context.Request.GetDisplayUrl().ToString().Contains("Clients")?"show":"")"
                      aria-labelledby="headingSliders" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         
@@ -65,14 +65,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed"
-                   href="@Url.Action("Index", "Products")"
+                   href="@(Context.Request.GetDisplayUrl().ToString().Contains("Products")?Context.Request.GetDisplayUrl().ToString():"#")"
                    data-toggle="collapse" data-target="#Modules"
-                   aria-expanded="#"
+                   aria-expanded="@(Context.Request.GetDisplayUrl().ToString().Contains("Products")?"true":"false")"
                    aria-controls="collapseModules">
                     <i class="fas fa-box"></i>
                     <span>Productos</span>
                 </a>
-                <div id="Modules" class="collapse "
+                <div id="Modules" class="collapse @(Context.Request.GetDisplayUrl().ToString().Contains("Products")?"show":"")"
                      aria-labelledby="headingModules" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
@@ -190,6 +190,7 @@
     </div>
     <!-- End of Page Wrapper -->
     <script type="text/javascript" src="~/js/site.min.js"></script>
+    @RenderSection("Modals", required: false)
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 

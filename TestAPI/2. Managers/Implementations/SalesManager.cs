@@ -31,7 +31,7 @@ namespace TestAPI.Managers.Implementations
 
         public async Task<List<Sales>> getAll()
         {
-            return await _context.sales.ToListAsync();
+            return await _context.sales.Include(p => p.product).Include(c => c.client).ToListAsync();
         }
 
         public async Task<Sales> getById(long id)

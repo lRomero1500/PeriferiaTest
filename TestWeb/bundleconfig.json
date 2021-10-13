@@ -18,6 +18,7 @@
       "node_modules/jquery/dist/jquery.js",
       "node_modules/jquery.easing/jquery.easing.js",
       "node_modules/jquery-confirm/dist/jquery-confirm.min.js",
+      "node_modules/jquery-maskmoney/dist/jquery.maskMoney.min.js",
       "node_modules/jquery-validation/dist/jquery.validate.min.js",
       "node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js",
       "node_modules/lodash/lodash.js",

@@ -1,5 +1,7 @@
-﻿@{
+﻿@model Sales
+@{
     ViewBag.Title = "Dashboard";
+    CultureInfo culinf = new CultureInfo("es-CO");
 }
 <h1 class="h3 mb-4 text-gray-800">Ventas</h1>
 <p class="mb-4">Aquí podrá ver las ventas realizadas</p>
@@ -14,13 +16,85 @@
                         <th width="12%">Cantidad</th>
                         <th width="16%">Valor unitario</th>
                         <th width="16%">Total</th>
-                        <th width="12%"></th>
+                        <th width="12%"> Acciones <a onclick="sales.showSaleModal();"><i class="fas fa-plus-square"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach (Sales sale in ViewBag.sales)
+                    {
+                        <tr>
+                            <td>@(sale.client.name+" "+sale.client.lastName)</td>
+                            <td>@sale.product.name</td>
+                            <td>@sale.quantity</td>
+                            <td>$ @((string.Format(culinf, "{0:#,0.#}", float.Parse((sale.product.unitValue.ToString())))))</td>
+                            <td>$ @((string.Format(culinf, "{0:#,0.#}", float.Parse((sale.totalAmount.ToString())))))</td>
+                            <td></td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@section Modals{
+    <div class="modal fade" id="salesModal" tabindex="-1" role="dialog" aria-labelledby="salesModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="modal-title font-weight-bold text-primary" id="salesModalLabel">Nueva venta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="contentForm" novalidate="novalidate">
+                        <div class="form-row">
+                            <div class="form-group col-4">
+                                <label for="client.id">Cliente</label>
+                                <select class="form-control" name="client.id" rel="select2" id="client.id"
+                                        data-rule-required="true" data-msg-required="El campo cliente es requerido">
+                                    <option value=""> Seleccione </option>
+                                    @foreach (Client client in ViewBag.clients)
+                                    {
+                                        <option value="@client.id">@(client.name+" "+client.lastName)</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="product.id">Producto</label>
+                                <select class="form-control" name="product.id" rel="select2" id="product.id"
+                                        data-rule-required="true" data-msg-required="El campo producto es requerido">
+                                    <option value=""> Seleccione </option>
+                                    @foreach (Product product in ViewBag.products)
+                                    {
+                                        <option value="@product.id">@product.name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-4">
+                                <label for="quantity">Cantidad</label>
+                                <input type="text" class="form-control" name="quantity" id="quantity"
+                                       data-rule-required="true" data-msg-required="El campo cantidad es requerido" data-rule-digits="true" data-msg-digits="ingrese solo numeros" />
+                            </div>
+                        </div>
+                        <br />
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                <button onclick="sales.submit(this)"
+                                        type="button"
+                                        class="btn btn-primary btnGeneral"
+                                        data-loading-text="<span class='spinner-grow spinner-grow-sm'
+                                    role='status' aria-hidden='true'></span> Guardando...">Guardar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script src="~/js/views/sales/sales.js"></script>
+}

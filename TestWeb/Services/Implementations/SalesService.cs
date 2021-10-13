@@ -17,9 +17,19 @@ namespace TestWeb.Services.Implementations
         {
             _httpClient = httpClient;
         }
-        public Task<Sales> createUpdate(Int64 id, Sales record)
+        public async Task<Sales> createUpdate(Int64 id, Sales record)
         {
-            throw new NotImplementedException();
+            if (id != 0)
+            {
+                return await _httpClient.
+                    Request(EnumDescription.GetDescription(ApiMethods.salesAll) + "/" + id).
+                    PutJsonAsync(record).
+                    ReceiveJson<Sales>();
+            }
+            return await _httpClient.
+                Request(EnumDescription.GetDescription(ApiMethods.salesAll)).
+                PostJsonAsync(record).
+                ReceiveJson<Sales>();
         }
 
         public Task<int> delete(long id)

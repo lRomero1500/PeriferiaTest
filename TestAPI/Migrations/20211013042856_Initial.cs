@@ -42,8 +42,8 @@ namespace TestAPI.Migrations
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    clientid = table.Column<long>(type: "bigint", nullable: true),
-                    productid = table.Column<long>(type: "bigint", nullable: true),
+                    productid = table.Column<long>(type: "bigint", nullable: false),
+                    clientid = table.Column<long>(type: "bigint", nullable: false),
                     quantity = table.Column<int>(type: "int", nullable: false),
                     totalAmount = table.Column<float>(type: "real", nullable: false)
                 },
@@ -55,13 +55,13 @@ namespace TestAPI.Migrations
                         column: x => x.clientid,
                         principalTable: "clients",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_sales_products_productid",
                         column: x => x.productid,
                         principalTable: "products",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
