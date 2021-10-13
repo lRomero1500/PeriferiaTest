@@ -9,18 +9,34 @@
             <table id="salesTable" rel="dataTable" class="table table-bordered" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th width="20%">Nombre Cliente</th>
-                        <th width="20%">Producto</th>
-                        <th width="12%">Cantidad</th>
-                        <th width="16%">Valor unitario</th>
-                        <th width="16%">Total</th>
-                        <th width="12%"></th>
+                        <th width="50%">Producto</th>
+                        <th width="40%">Valor unitario</th>
+                        <th width="10%">Acciones <a href="@Url.Action("Create", "Products")"><i class="fas fa-plus-square"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach (Product product in ViewBag.products)
+                    {
+                        <tr>
+                            <td>@product.name</td>
+                            <td>@product.unitValue</td>
+                            <td>
+                                <a onclick="products.delete(this,@product.id)"
+                                   data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>-
+                                <a href="@Url.Action("Edit", "Products",new { id=product.id})"
+                                   data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/views/products/products.js"></script>
+}

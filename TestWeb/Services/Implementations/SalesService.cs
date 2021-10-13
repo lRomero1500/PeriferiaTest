@@ -17,7 +17,7 @@ namespace TestWeb.Services.Implementations
         {
             _httpClient = httpClient;
         }
-        public Task<Sales> createUpdate(Sales record)
+        public Task<Sales> createUpdate(Int64 id, Sales record)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿let clients = {
+﻿let products = {
     submit: ($obj) => {
         let id = document.getElementById('id').value;
         window.form = $($obj.form);
@@ -8,7 +8,7 @@
             let url = '';
             let data = form.serialize();
             if (id === '0') {
-                url = baseUrl + 'Clients/Create';
+                url = baseUrl + 'Products/Create';
                 axios.post(url, data).then((response) => {
                     if (!response.data.error) {
                         $.customConfirmNoCancel('Confirmación!', response.data.msg, function () {
@@ -27,7 +27,7 @@
                 });
             }
             else {
-                url = baseUrl + 'Clients/Update/' + id;
+                url = baseUrl + 'Products/Update/' + id;
                 axios.put(url, data).then((response) => {
                     if (!response.data.error) {
                         $.customConfirmNoCancel('Confirmación!', response.data.msg, function () {
@@ -47,9 +47,9 @@
             }
         }
     },
-    delete: ($obj,$id) => {
+    delete: ($obj, $id) => {
         $($obj).button('loading');
-        let url = baseUrl + 'Clients/Delete/' + $id;
+        let url = baseUrl + 'Products/Delete/' + $id;
         $.customConfirm('Confirmación!', '¿Realmente desea borrar este registro?', function () {
             axios.delete(url)
                 .then((response) => {
@@ -73,5 +73,5 @@
         }, true, 'alert', true, function () {
             $($obj).button('reset');
         });
-	}
+    }
 }

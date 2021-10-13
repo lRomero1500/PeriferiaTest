@@ -17,14 +17,27 @@ namespace TestWeb.Services.Implementations
         {
             _httpClient = httpClient;
         }
-        public Task<Client> createUpdate(Client record)
+        public async Task<Client> createUpdate(Int64 id, Client record)
         {
-            throw new NotImplementedException();
+            if (id != 0)
+            {
+                return await _httpClient.
+                    Request(EnumDescription.GetDescription(ApiMethods.clientsAll) + "/" + id).
+                    PutJsonAsync(record).
+                    ReceiveJson<Client>();
+            }
+            return await _httpClient.
+                Request(EnumDescription.GetDescription(ApiMethods.clientsAll)).
+                PostJsonAsync(record).
+                ReceiveJson<Client>();
         }
 
-        public Task<int> delete(long id)
+        public async Task<int> delete(long id)
         {
-            throw new NotImplementedException();
+            return await _httpClient.
+                Request(EnumDescription.GetDescription(ApiMethods.clientsAll) + '/' + id).
+                DeleteAsync().
+                ReceiveJson<int>();
         }
 
         public async Task<List<Client>> getAll()
@@ -35,9 +48,12 @@ namespace TestWeb.Services.Implementations
                 ReceiveJson<List<Client>>();
         }
 
-        public Task<Client> getById(long id)
+        public async Task<Client> getById(long id)
         {
-            throw new NotImplementedException();
+            return  await _httpClient.
+                Request(EnumDescription.GetDescription(ApiMethods.clientsAll) + '/' + id).
+                GetAsync().
+                ReceiveJson<Client>();
         }
     }
 }

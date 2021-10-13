@@ -11,7 +11,7 @@
                     <tr>
                         <th width="50%">Nombre Cliente</th>
                         <th width="40%">DNI</th>
-                        <th width="10%"> Acciones <a href=""><i class="fas fa-plus-square"></i></a></th>
+                        <th width="10%"> Acciones <a href="@Url.Action("Create", "Clients")"><i class="fas fa-plus-square"></i></a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -20,7 +20,16 @@
                         <tr>
                             <td>@(client.name+" "+client.lastName)</td>
                             <td>@client.dni</td>
-                            <td></td>
+                            <td>
+                                <a onclick="clients.delete(this,@client.id)"
+                                   data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>-
+                                <a href="@Url.Action("Edit", "Clients",new { id=client.id})"
+                                   data-loading-text="<span class='spinner-grow spinner-grow-sm' role='status' aria-hidden='true'></span>">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -28,3 +37,6 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="~/js/views/clients/clients.js"></script>
+}

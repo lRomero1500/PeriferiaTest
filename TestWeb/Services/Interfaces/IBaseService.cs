@@ -9,7 +9,7 @@ namespace TestWeb.Services.Interfaces
     {
         public Task<List<T>> getAll();
         public Task<T> getById(Int64 id);
-        public Task<T> createUpdate(T record);
+        public Task<T> createUpdate(Int64 id,T record);
         public Task<int> delete(Int64 id);
     }
 }

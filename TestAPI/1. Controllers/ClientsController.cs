@@ -63,7 +63,7 @@ namespace TestAPI.Controllers
                 throw;
             }
 
-            return NoContent();
+            return CreatedAtAction("GetClient", new { id = client.id }, client);
         }
 
         // POST: api/Clients
@@ -78,13 +78,9 @@ namespace TestAPI.Controllers
 
         // DELETE: api/Clients/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClient(long id)
-        {           
-            if (await _clientsManager.delete(id) == -1)
-            {
-                return NotFound();
-            }
-            return NoContent();
+        public async Task<int> DeleteClient(long id)
+        {
+            return await _clientsManager.delete(id);
         }
     }
 }

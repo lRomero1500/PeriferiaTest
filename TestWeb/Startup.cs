@@ -30,6 +30,7 @@ namespace TestWeb
             services.AddSingleton<IFlurlClient>(new FlurlClient { BaseUrl = Configuration.GetSection("ApiUrl").Value });
             services.AddScoped<ISalesService, SalesService>();
             services.AddScoped<IClientsService, ClientsService>();
+            services.AddScoped<IProductsService, ProductsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

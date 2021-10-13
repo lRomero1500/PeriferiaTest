@@ -11,6 +11,8 @@ namespace TestWeb.Helpers
         [Description("api/Sales")]
         salesAll,
         [Description("api/Clients")]
-        clientsAll
+        clientsAll,
+        [Description("api/Products")]
+        productsAll
     }
 }

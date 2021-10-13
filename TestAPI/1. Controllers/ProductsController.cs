@@ -62,7 +62,7 @@ namespace TestAPI.Controllers
                 throw;
             }
 
-            return NoContent();
+            return CreatedAtAction("GetProduct", new { id = product.id }, product);
         }
 
         // POST: api/Products
@@ -77,13 +77,9 @@ namespace TestAPI.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(long id)
+        public async Task<int> DeleteProduct(long id)
         {
-            if (await _productsManager.delete(id) == -1)
-            {
-                return NotFound();
-            }
-            return NoContent();
+            return await _productsManager.delete(id);
         }
        
     }

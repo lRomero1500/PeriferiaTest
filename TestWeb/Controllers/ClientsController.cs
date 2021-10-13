@@ -25,15 +25,71 @@ namespace TestWeb.Controllers
             ViewBag.clients = await _clientsService.getAll();
             return View();
         }
-        
+
         public IActionResult Create()
         {
             return View(new Client());
         }
-        [HttpPost]
-        public async Task<JsonResult> NewClient(Client client)
+        public async Task<IActionResult> Edit(Int64 id)
         {
-            return Json(new { Success = ModelState.IsValid, Errors = false, LogOff = false });
+            Client client = await _clientsService.getById(id);
+            return View("Create", client);
+        }
+        [HttpPost]
+        public async Task<JsonResult> Create(Client client)
+        {
+            var response = new JsonResponse<Client>();
+            try
+            {
+                response.data = await _clientsService.createUpdate(0, client);
+                response.msg = "Cliente creado correctamentente!";
+                response.redirect = Url.Action("Index", "Clients");
+            }
+            catch (Exception ex)
+            {
+                response.msg = ex.Message;
+                response.error = true;
+            }
+
+            return Json(response);
+        }
+        [HttpPut]
+        public async Task<JsonResult> Update(Int64 id, Client client)
+        {
+            var response = new JsonResponse<Client>();
+            try
+            {
+                response.data = await _clientsService.createUpdate(id, client);
+                response.msg = "Cliente actualizado correctamentente!";
+                response.redirect = Url.Action("Index", "Clients");
+            }
+            catch (Exception ex)
+            {
+                response.msg = ex.Message;
+                response.error = true;
+            }
+
+            return Json(response);
+        }
+        [HttpDelete]
+        public async Task<JsonResult> Delete(Int64 id)
+        {
+            var response = new JsonResponse<Client>();
+            try
+            {
+                var result = await _clientsService.delete(id);
+                if (result != -1)
+                {
+                    response.msg = "Cliente eliminado correctamentente!";
+                }
+            }
+            catch (Exception ex)
+            {
+                response.msg = ex.Message;
+                response.error = true;
+            }
+
+            return Json(response);
         }
     }
 }

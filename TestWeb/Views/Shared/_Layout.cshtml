@@ -65,7 +65,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed"
-                   href="#"
+                   href="@Url.Action("Index", "Products")"
                    data-toggle="collapse" data-target="#Modules"
                    aria-expanded="#"
                    aria-controls="collapseModules">
@@ -76,9 +76,9 @@
                      aria-labelledby="headingModules" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="">Crear</a>
+                        <a class="collapse-item" href="@Url.Action("Create", "Products")">Crear</a>
 
-                        <a class="collapse-item" href="">Ver</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Products")">Ver</a>
                     </div>
                 </div>
             </li>          

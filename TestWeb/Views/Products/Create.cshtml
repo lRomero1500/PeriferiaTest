@@ -1,0 +1,36 @@
+﻿@model Product
+@{
+    ViewBag.Title = "Crear Clientes";
+}
+<h1 class="h3 mb-4 text-gray-800">Crear Producto</h1>
+<p class="mb-4">Aquí podrá crear productos, los cuales podrán ser adquiridos por clientes</p>
+<div class="card shadow mb-4">
+    <div class="card-body">
+        <form novalidate>
+            <input name="id" id="id" type="hidden" value="@Model.id">
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label for="name">Nombre</label>
+                    <input name="name" id="name" class="form-control" data-rule-required="true"
+                           maxlength="150"
+                           data-msg-required="El campo nombre es requerido" value="@Model.name">
+                </div>
+                <div class="form-group col-6">
+                    <label for="unitValue">Valor unitario</label>
+                    <input name="unitValue" id="unitValue" class="form-control" data-rule-required="true"
+                           data-msg-required="El campo valor unitario es requerido" data-rule-digits="true" data-msg-digits="Ingrese solo numeros"
+                           maxlength="150" value="@Model.unitValue">
+                </div>
+            </div>           
+            <div class="form-row">
+                <button onclick="products.submit(this);" type="button" class="btn btn-primary btnGeneral"
+                        data-loading-text="<span class='spinner-grow spinner-grow-sm'
+                                    role='status' aria-hidden='true'></span> Guardando...">Guardar
+                    </button>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/js/views/products/products.js"></script>
+}
